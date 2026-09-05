@@ -1,0 +1,13 @@
+{
+  "scenario_id": "keyvault-effective-nsg-deny",
+  "evidence_class": "simulated",
+  "source": {"name": "deployment-agent", "kind": "azure-vnet", "vnet_id": "/subscriptions/demo/resourceGroups/network/providers/Microsoft.Network/virtualNetworks/build-spoke"},
+  "target": {"fqdn": "secrets.vault.azure.net", "port": 443, "protocol": "TCP"},
+  "private_endpoint": {"connection_status": "Approved", "provisioning_state": "Succeeded", "private_ip": "10.70.2.9"},
+  "dns_observation": {"result": "resolved", "resolved_ip": "10.70.2.9", "cname_chain": ["secrets.privatelink.vaultcore.azure.net"]},
+  "private_dns": {"zones": [{"name": "privatelink.vaultcore.azure.net", "a_records": [{"name": "secrets", "ip": "10.70.2.9"}], "linked_vnets": ["/subscriptions/demo/resourceGroups/network/providers/Microsoft.Network/virtualNetworks/build-spoke"]}]},
+  "resolver": {"required": false},
+  "routing": {"actual_next_hop": "InterfaceEndpoint", "matched_prefix": "10.70.2.9/32"},
+  "network_security": {"decision": "deny", "rule": "DenyAllOutbound"},
+  "service_firewall": {"private_access": "allow", "public_access": "deny"}
+}

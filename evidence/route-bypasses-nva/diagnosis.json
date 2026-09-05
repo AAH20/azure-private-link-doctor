@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-09-05T00:52:25.839004+00:00",
+  "scenario_id": "endpoint-route-bypasses-central-nva",
+  "evidence_class": "simulated",
+  "status": "DIAGNOSED",
+  "summary": {
+    "root_causes": 1,
+    "confirmed": 1,
+    "probable": 0,
+    "evidence_completeness_percent": 100.0,
+    "missing_sections": []
+  },
+  "path": {
+    "source": "regulated-app",
+    "fqdn": "audit.blob.core.windows.net",
+    "resolved_ip": "10.80.2.10",
+    "endpoint_ip": "10.80.2.10",
+    "next_hop": "InterfaceEndpoint"
+  },
+  "findings": [
+    {
+      "rule_id": "PE-ROUTE-001",
+      "status": "root-cause",
+      "confidence": "confirmed",
+      "severity": "high",
+      "summary": "The effective next hop differs from the declared network path.",
+      "evidence": [
+        "expected=VirtualAppliance",
+        "actual=InterfaceEndpoint",
+        "prefix=10.80.2.10/32"
+      ],
+      "remediation": "Review longest-prefix-match behavior, private endpoint network policies and the intended NVA/firewall path.",
+      "references": [
+        "https://learn.microsoft.com/troubleshoot/azure/private-link/troubleshoot-private-endpoint-connectivity-failure"
+      ]
+    }
+  ],
+  "claim_boundary": "The result is limited to supplied evidence; it does not prove end-to-end connectivity or authorize remediation.",
+  "receipt": {
+    "algorithm": "sha256",
+    "content_digest": "3dbc7e3f31a8df0acae32f7ea24ca400ca197ec15f7ca40e4d2093eafe8a106e"
+  }
+}

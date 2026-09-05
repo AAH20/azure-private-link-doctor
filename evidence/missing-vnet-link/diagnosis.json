@@ -1,0 +1,58 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-09-05T00:52:25.580820+00:00",
+  "scenario_id": "storage-missing-vnet-link",
+  "evidence_class": "simulated",
+  "status": "DIAGNOSED",
+  "summary": {
+    "root_causes": 2,
+    "confirmed": 2,
+    "probable": 0,
+    "evidence_completeness_percent": 100.0,
+    "missing_sections": []
+  },
+  "path": {
+    "source": "checkout-vm",
+    "fqdn": "orders.blob.core.windows.net",
+    "resolved_ip": "20.60.10.4",
+    "endpoint_ip": "10.40.2.4",
+    "next_hop": "InterfaceEndpoint"
+  },
+  "findings": [
+    {
+      "rule_id": "PE-DNS-003",
+      "status": "root-cause",
+      "confidence": "confirmed",
+      "severity": "high",
+      "summary": "The Private DNS zone is not linked to the querying virtual network.",
+      "evidence": [
+        "source_vnet=/subscriptions/demo/resourcegroups/network/providers/microsoft.network/virtualnetworks/spoke-prod",
+        "linked_vnets=0"
+      ],
+      "remediation": "Add a non-registration VNet link or provide the namespace through an approved centralized DNS path.",
+      "references": [
+        "https://learn.microsoft.com/troubleshoot/azure/private-link/troubleshoot-private-endpoint-dns-resolution"
+      ]
+    },
+    {
+      "rule_id": "PE-DNS-004",
+      "status": "root-cause",
+      "confidence": "confirmed",
+      "severity": "high",
+      "summary": "The service FQDN resolves to a public address instead of the endpoint private IP.",
+      "evidence": [
+        "resolved_ip=20.60.10.4",
+        "endpoint_ip=10.40.2.4"
+      ],
+      "remediation": "Correct the Private DNS zone, record and resolution path before investigating routing.",
+      "references": [
+        "https://learn.microsoft.com/troubleshoot/azure/private-link/troubleshoot-private-endpoint-dns-resolution"
+      ]
+    }
+  ],
+  "claim_boundary": "The result is limited to supplied evidence; it does not prove end-to-end connectivity or authorize remediation.",
+  "receipt": {
+    "algorithm": "sha256",
+    "content_digest": "e03a6e43642df3d2648e60acd363029a866124efd3eab3300115f022ddaa161b"
+  }
+}

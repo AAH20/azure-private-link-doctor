@@ -1,0 +1,5 @@
+flowchart LR
+  SRC["branch-erp"] --> DNS["DNS: None"]
+  DNS --> PE["Private endpoint: 10.50.4.7"]
+  PE --> HOP["Next hop: VirtualNetworkGateway"]
+  HOP --> RESULT["Failure found"]

@@ -1,0 +1,13 @@
+{
+  "scenario_id": "onprem-invalid-azure-dns-forwarder",
+  "evidence_class": "simulated",
+  "source": {"name": "branch-erp", "kind": "on-premises", "vnet_id": ""},
+  "target": {"fqdn": "erpfiles.file.core.windows.net", "port": 445, "protocol": "TCP"},
+  "private_endpoint": {"connection_status": "Approved", "provisioning_state": "Succeeded", "private_ip": "10.50.4.7"},
+  "dns_observation": {"result": "timeout", "resolved_ip": null, "cname_chain": []},
+  "private_dns": {"zones": [{"name": "privatelink.file.core.windows.net", "a_records": [{"name": "erpfiles", "ip": "10.50.4.7"}], "linked_vnets": ["/subscriptions/demo/resourceGroups/network/providers/Microsoft.Network/virtualNetworks/dns-hub"]}]},
+  "resolver": {"required": true, "forward_to": "168.63.129.16", "ruleset_linked_to_source_vnet": true},
+  "routing": {"actual_next_hop": "VirtualNetworkGateway", "matched_prefix": "10.50.0.0/16"},
+  "network_security": {"decision": "allow", "rule": "AllowSMB"},
+  "service_firewall": {"private_access": "allow", "public_access": "deny"}
+}

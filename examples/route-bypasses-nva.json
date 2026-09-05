@@ -1,0 +1,13 @@
+{
+  "scenario_id": "endpoint-route-bypasses-central-nva",
+  "evidence_class": "simulated",
+  "source": {"name": "regulated-app", "kind": "azure-vnet", "vnet_id": "/subscriptions/demo/resourceGroups/network/providers/Microsoft.Network/virtualNetworks/regulated-spoke"},
+  "target": {"fqdn": "audit.blob.core.windows.net", "port": 443, "protocol": "TCP"},
+  "private_endpoint": {"connection_status": "Approved", "provisioning_state": "Succeeded", "private_ip": "10.80.2.10"},
+  "dns_observation": {"result": "resolved", "resolved_ip": "10.80.2.10", "cname_chain": ["audit.privatelink.blob.core.windows.net"]},
+  "private_dns": {"zones": [{"name": "privatelink.blob.core.windows.net", "a_records": [{"name": "audit", "ip": "10.80.2.10"}], "linked_vnets": ["/subscriptions/demo/resourceGroups/network/providers/Microsoft.Network/virtualNetworks/regulated-spoke"]}]},
+  "resolver": {"required": false},
+  "routing": {"expected_next_hop": "VirtualAppliance", "actual_next_hop": "InterfaceEndpoint", "matched_prefix": "10.80.2.10/32"},
+  "network_security": {"decision": "allow", "rule": "AllowHTTPS"},
+  "service_firewall": {"private_access": "allow", "public_access": "deny"}
+}

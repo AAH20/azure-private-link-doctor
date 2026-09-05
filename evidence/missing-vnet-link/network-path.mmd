@@ -1,0 +1,5 @@
+flowchart LR
+  SRC["checkout-vm"] --> DNS["DNS: 20.60.10.4"]
+  DNS --> PE["Private endpoint: 10.40.2.4"]
+  PE --> HOP["Next hop: InterfaceEndpoint"]
+  HOP --> RESULT["Failure found"]

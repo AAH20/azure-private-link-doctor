@@ -1,0 +1,13 @@
+{
+  "scenario_id": "storage-missing-vnet-link",
+  "evidence_class": "simulated",
+  "source": {"name": "checkout-vm", "kind": "azure-vnet", "vnet_id": "/subscriptions/demo/resourceGroups/network/providers/Microsoft.Network/virtualNetworks/spoke-prod"},
+  "target": {"fqdn": "orders.blob.core.windows.net", "port": 443, "protocol": "TCP"},
+  "private_endpoint": {"connection_status": "Approved", "provisioning_state": "Succeeded", "private_ip": "10.40.2.4"},
+  "dns_observation": {"result": "resolved", "resolved_ip": "20.60.10.4", "cname_chain": ["orders.privatelink.blob.core.windows.net"]},
+  "private_dns": {"zones": [{"name": "privatelink.blob.core.windows.net", "a_records": [{"name": "orders", "ip": "10.40.2.4"}], "linked_vnets": []}]},
+  "resolver": {"required": false},
+  "routing": {"actual_next_hop": "InterfaceEndpoint", "matched_prefix": "10.40.2.4/32"},
+  "network_security": {"decision": "allow", "rule": "AllowHTTPS"},
+  "service_firewall": {"private_access": "allow", "public_access": "deny"}
+}

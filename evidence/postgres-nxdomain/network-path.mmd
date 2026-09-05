@@ -1,0 +1,5 @@
+flowchart LR
+  SRC["orders-api"] --> DNS["DNS: None"]
+  DNS --> PE["Private endpoint: 10.40.3.5"]
+  PE --> HOP["Next hop: InterfaceEndpoint"]
+  HOP --> RESULT["Failure found"]

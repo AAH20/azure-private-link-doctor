@@ -1,0 +1,25 @@
+name: LinkDoctor CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Test all diagnostic scenarios
+        run: bash scripts/validate.sh
+      - name: Compile generated Bicep remediation
+        run: |
+          az bicep install
+          az bicep build --file "${TMPDIR:-/tmp}/linkdoctor-validation/missing-vnet-link/remediation/main.bicep" --outfile /tmp/linkdoctor-remediation.json
+      - name: Build Python wheel
+        run: python3 -m pip wheel . --wheel-dir /tmp/wheels

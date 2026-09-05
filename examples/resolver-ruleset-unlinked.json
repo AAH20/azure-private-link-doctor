@@ -1,0 +1,13 @@
+{
+  "scenario_id": "resolver-ruleset-wrong-spoke",
+  "evidence_class": "simulated",
+  "source": {"name": "analytics-vm", "kind": "azure-vnet", "vnet_id": "/subscriptions/demo/resourceGroups/network/providers/Microsoft.Network/virtualNetworks/analytics-spoke"},
+  "target": {"fqdn": "warehouse.database.windows.net", "port": 1433, "protocol": "TCP"},
+  "private_endpoint": {"connection_status": "Approved", "provisioning_state": "Succeeded", "private_ip": "10.60.2.8"},
+  "dns_observation": {"result": "timeout", "resolved_ip": null, "cname_chain": []},
+  "private_dns": {"zones": [{"name": "privatelink.database.windows.net", "a_records": [{"name": "warehouse", "ip": "10.60.2.8"}], "linked_vnets": ["/subscriptions/demo/resourceGroups/network/providers/Microsoft.Network/virtualNetworks/analytics-spoke"]}]},
+  "resolver": {"required": true, "forward_to": "10.10.1.4", "ruleset_linked_to_source_vnet": false},
+  "routing": {"actual_next_hop": "VirtualNetworkPeering", "matched_prefix": "10.60.0.0/16"},
+  "network_security": {"decision": "allow", "rule": "AllowSQL"},
+  "service_firewall": {"private_access": "allow", "public_access": "deny"}
+}

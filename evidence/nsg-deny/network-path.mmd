@@ -1,0 +1,5 @@
+flowchart LR
+  SRC["deployment-agent"] --> DNS["DNS: 10.70.2.9"]
+  DNS --> PE["Private endpoint: 10.70.2.9"]
+  PE --> HOP["Next hop: InterfaceEndpoint"]
+  HOP --> RESULT["Failure found"]

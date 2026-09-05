@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-09-05T00:52:25.635166+00:00",
+  "scenario_id": "keyvault-effective-nsg-deny",
+  "evidence_class": "simulated",
+  "status": "DIAGNOSED",
+  "summary": {
+    "root_causes": 1,
+    "confirmed": 1,
+    "probable": 0,
+    "evidence_completeness_percent": 100.0,
+    "missing_sections": []
+  },
+  "path": {
+    "source": "deployment-agent",
+    "fqdn": "secrets.vault.azure.net",
+    "resolved_ip": "10.70.2.9",
+    "endpoint_ip": "10.70.2.9",
+    "next_hop": "InterfaceEndpoint"
+  },
+  "findings": [
+    {
+      "rule_id": "PE-NSG-001",
+      "status": "root-cause",
+      "confidence": "confirmed",
+      "severity": "critical",
+      "summary": "The effective network security decision denies the declared flow.",
+      "evidence": [
+        "rule=DenyAllOutbound",
+        "port=443",
+        "protocol=TCP"
+      ],
+      "remediation": "Create the narrowest reviewed allow rule and verify the effective NSG result from the source interface.",
+      "references": [
+        "https://learn.microsoft.com/troubleshoot/azure/private-link/troubleshoot-private-endpoint-connectivity-failure"
+      ]
+    }
+  ],
+  "claim_boundary": "The result is limited to supplied evidence; it does not prove end-to-end connectivity or authorize remediation.",
+  "receipt": {
+    "algorithm": "sha256",
+    "content_digest": "7510446c87abcc2bb03e44296e92c08cb510a00e254d0bce890bf2bbfb197eb7"
+  }
+}

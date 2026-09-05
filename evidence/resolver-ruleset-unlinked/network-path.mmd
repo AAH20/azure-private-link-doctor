@@ -1,0 +1,5 @@
+flowchart LR
+  SRC["analytics-vm"] --> DNS["DNS: None"]
+  DNS --> PE["Private endpoint: 10.60.2.8"]
+  PE --> HOP["Next hop: VirtualNetworkPeering"]
+  HOP --> RESULT["Failure found"]

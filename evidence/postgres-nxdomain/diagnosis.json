@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-09-05T00:52:25.741534+00:00",
+  "scenario_id": "postgres-missing-record-nxdomain",
+  "evidence_class": "simulated",
+  "status": "DIAGNOSED",
+  "summary": {
+    "root_causes": 2,
+    "confirmed": 1,
+    "probable": 1,
+    "evidence_completeness_percent": 100.0,
+    "missing_sections": []
+  },
+  "path": {
+    "source": "orders-api",
+    "fqdn": "orders-db.postgres.database.azure.com",
+    "resolved_ip": null,
+    "endpoint_ip": "10.40.3.5",
+    "next_hop": "InterfaceEndpoint"
+  },
+  "findings": [
+    {
+      "rule_id": "PE-DNS-002",
+      "status": "root-cause",
+      "confidence": "confirmed",
+      "severity": "high",
+      "summary": "The Private DNS A record is missing or does not match the endpoint IP.",
+      "evidence": [
+        "record=orders-db",
+        "record_ip=None",
+        "endpoint_ip=10.40.3.5"
+      ],
+      "remediation": "Use a DNS zone group to create and maintain the record, then validate the resulting IP.",
+      "references": [
+        "https://learn.microsoft.com/troubleshoot/azure/private-link/troubleshoot-private-endpoint-dns-resolution"
+      ]
+    },
+    {
+      "rule_id": "PE-DNS-005",
+      "status": "root-cause",
+      "confidence": "probable",
+      "severity": "high",
+      "summary": "A linked private namespace returns NXDOMAIN, consistent with a missing record or namespace interception.",
+      "evidence": [
+        "zone=privatelink.postgres.database.azure.com",
+        "dns_result=nxdomain"
+      ],
+      "remediation": "Restore the required A record; evaluate NXDOMAIN fallback only when public resolution is intentionally required.",
+      "references": [
+        "https://learn.microsoft.com/troubleshoot/azure/private-link/troubleshoot-private-endpoint-dns-resolution"
+      ]
+    }
+  ],
+  "claim_boundary": "The result is limited to supplied evidence; it does not prove end-to-end connectivity or authorize remediation.",
+  "receipt": {
+    "algorithm": "sha256",
+    "content_digest": "c6a905e1f83b0be5d8ebba653f71377e240d0b1e83eedd459cf70c9f4b915713"
+  }
+}

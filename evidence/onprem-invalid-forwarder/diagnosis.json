@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-09-05T00:52:25.685644+00:00",
+  "scenario_id": "onprem-invalid-azure-dns-forwarder",
+  "evidence_class": "simulated",
+  "status": "DIAGNOSED",
+  "summary": {
+    "root_causes": 1,
+    "confirmed": 1,
+    "probable": 0,
+    "evidence_completeness_percent": 100.0,
+    "missing_sections": []
+  },
+  "path": {
+    "source": "branch-erp",
+    "fqdn": "erpfiles.file.core.windows.net",
+    "resolved_ip": null,
+    "endpoint_ip": "10.50.4.7",
+    "next_hop": "VirtualNetworkGateway"
+  },
+  "findings": [
+    {
+      "rule_id": "PE-RESOLVER-001",
+      "status": "root-cause",
+      "confidence": "confirmed",
+      "severity": "high",
+      "summary": "An external DNS server attempts to forward directly to Azure's virtual DNS address.",
+      "evidence": [
+        "source_kind=on-premises",
+        "forward_to=168.63.129.16"
+      ],
+      "remediation": "Forward the private namespace to an Azure DNS Private Resolver inbound endpoint reachable over VPN or ExpressRoute.",
+      "references": [
+        "https://learn.microsoft.com/troubleshoot/azure/private-link/troubleshoot-private-endpoint-dns-resolution"
+      ]
+    }
+  ],
+  "claim_boundary": "The result is limited to supplied evidence; it does not prove end-to-end connectivity or authorize remediation.",
+  "receipt": {
+    "algorithm": "sha256",
+    "content_digest": "f1167fb6a547b6b1d85f85a80672837b188df068ddffbf5f879bde575ad583ba"
+  }
+}

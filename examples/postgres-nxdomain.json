@@ -1,0 +1,13 @@
+{
+  "scenario_id": "postgres-missing-record-nxdomain",
+  "evidence_class": "simulated",
+  "source": {"name": "orders-api", "kind": "azure-vnet", "vnet_id": "/subscriptions/demo/resourceGroups/network/providers/Microsoft.Network/virtualNetworks/spoke-prod"},
+  "target": {"fqdn": "orders-db.postgres.database.azure.com", "port": 5432, "protocol": "TCP"},
+  "private_endpoint": {"connection_status": "Approved", "provisioning_state": "Succeeded", "private_ip": "10.40.3.5"},
+  "dns_observation": {"result": "nxdomain", "resolved_ip": null, "cname_chain": ["orders-db.privatelink.postgres.database.azure.com"]},
+  "private_dns": {"zones": [{"name": "privatelink.postgres.database.azure.com", "a_records": [], "linked_vnets": ["/subscriptions/demo/resourceGroups/network/providers/Microsoft.Network/virtualNetworks/spoke-prod"]}]},
+  "resolver": {"required": false},
+  "routing": {"actual_next_hop": "InterfaceEndpoint", "matched_prefix": "10.40.3.5/32"},
+  "network_security": {"decision": "allow", "rule": "AllowPostgres"},
+  "service_firewall": {"private_access": "allow", "public_access": "deny"}
+}

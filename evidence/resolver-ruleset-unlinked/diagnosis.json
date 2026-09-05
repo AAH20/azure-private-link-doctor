@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-09-05T00:52:25.789600+00:00",
+  "scenario_id": "resolver-ruleset-wrong-spoke",
+  "evidence_class": "simulated",
+  "status": "DIAGNOSED",
+  "summary": {
+    "root_causes": 1,
+    "confirmed": 1,
+    "probable": 0,
+    "evidence_completeness_percent": 100.0,
+    "missing_sections": []
+  },
+  "path": {
+    "source": "analytics-vm",
+    "fqdn": "warehouse.database.windows.net",
+    "resolved_ip": null,
+    "endpoint_ip": "10.60.2.8",
+    "next_hop": "VirtualNetworkPeering"
+  },
+  "findings": [
+    {
+      "rule_id": "PE-RESOLVER-002",
+      "status": "root-cause",
+      "confidence": "confirmed",
+      "severity": "high",
+      "summary": "The required DNS forwarding ruleset is not linked to the querying VNet.",
+      "evidence": [
+        "ruleset_linked_to_source_vnet=false"
+      ],
+      "remediation": "Link the ruleset to the client VNet and retest recursive resolution.",
+      "references": [
+        "https://learn.microsoft.com/troubleshoot/azure/private-link/troubleshoot-private-endpoint-dns-resolution"
+      ]
+    }
+  ],
+  "claim_boundary": "The result is limited to supplied evidence; it does not prove end-to-end connectivity or authorize remediation.",
+  "receipt": {
+    "algorithm": "sha256",
+    "content_digest": "620caed4f69075e709162c3a3fd8bc7458b2c8791b2a03b94d57713f7d559690"
+  }
+}

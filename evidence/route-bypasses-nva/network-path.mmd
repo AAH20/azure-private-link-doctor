@@ -1,0 +1,5 @@
+flowchart LR
+  SRC["regulated-app"] --> DNS["DNS: 10.80.2.10"]
+  DNS --> PE["Private endpoint: 10.80.2.10"]
+  PE --> HOP["Next hop: InterfaceEndpoint"]
+  HOP --> RESULT["Failure found"]
